@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis XV Años - Daniela</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400&display=swap');
+        
+        body, html { margin: 0; padding: 0; height: 100%; font-family: 'Montserrat', sans-serif; }
+        
+        .hero {
+            height: 100vh;
+            background-image: url('image_0.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            background-color: #2c003e; /* Magenta profundo como fallback */
+        }
+
+        .overlay {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        h1 { font-family: 'Cinzel', serif; font-size: 3.5rem; color: #ffd700; margin: 0; }
+        .date { font-size: 1.5rem; margin: 10px 0; }
+        
+        .countdown {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        .time-box {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            border-radius: 10px;
+            min-width: 60px;
+        }
+        .time-box div { font-size: 1.5rem; font-weight: bold; }
+        .time-box span { font-size: 0.7rem; text-transform: uppercase; }
+
+        .btn {
+            background: #d4145a; /* Magenta */
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            display: inline-block;
+            transition: 0.3s;
+            border: 2px solid #c0c0c0;
+        }
+        .btn:hover { background: #b0104a; }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <div class="overlay">
+        <h1>Daniela</h1>
+        <p>Mis Quince Años</p>
+        <div class="date">Sábado 29 de Agosto · 6:00 PM</div>
+        
+        <div class="countdown" id="countdown">
+            <div class="time-box"><div id="d">00</div><span>Días</span></div>
+            <div class="time-box"><div id="h">00</div><span>Horas</span></div>
+            <div class="time-box"><div id="m">00</div><span>Min</span></div>
+            <div class="time-box"><div id="s">00</div><span>Seg</span></div>
+        </div>
+
+        <a href="https://wa.me/573225685161" class="btn">Confirmar Asistencia</a>
+    </div>
+</div>
+
+<audio id="audio" loop>
+    <!-- NOTA: Asegúrate de tener un archivo de música en tu repositorio -->
+    <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+    const target = new Date("August 29, 2026 18:00:00").getTime();
+    
+    function update() {
+        const now = new Date().getTime();
+        const diff = target - now;
+        document.getElementById("d").innerText = Math.floor(diff / (1000*60*60*24));
+        document.getElementById("h").innerText = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+        document.getElementById("m").innerText = Math.floor((diff % (1000*60*60)) / (1000*60));
+        document.getElementById("s").innerText = Math.floor((diff % (1000*60)) / 1000);
+    }
+    setInterval(update, 1000);
+    
+    // Reproducción automática al hacer click (política de navegadores)
+    document.body.addEventListener('click', () => { document.getElementById('audio').play(); }, {once: true});
+</script>
+</body>
+</html>
